@@ -49,7 +49,7 @@ router.post("/", validProject, (req, res) => {
 });
 
 // POST method to Create new Action
-router.post("/:id/actions", (req, res) => {
+router.post("/:id/actions", validAction, (req, res) => {
   actionsDB
     .insert(req.body)
     .then(action => {
@@ -97,9 +97,10 @@ function validProject(req, res, next) {
 //  Custon Middleware validateAction
 function validAction(req, res, next) {
   if (req.body.notes && req.body.description && req.body.project_id) {
-    if (req.body.project_id === req.params.id) {
+    if (req.body.project_id === Number(req.params.id)) {
       next();
     } else {
+      console.log(req.body.project_id, req.params.id);
       res.status(400).json({
         message: "project_id is inCorrect"
       });
