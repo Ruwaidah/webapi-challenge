@@ -2,6 +2,8 @@ const express = require("express");
 
 const server = express();
 const projectsRouter = require("./Routers/projectRouter");
+
+const actionsRouter = require("./Routers/actionsRouter");
 server.use(express.json());
 
 //  custom middleware Logger
@@ -17,5 +19,6 @@ server.get("/", (req, res) => {
 
 server.use(logger);
 server.use("/projects", projectsRouter);
+server.use("/actions", actionsRouter);
 
 module.exports = server;
