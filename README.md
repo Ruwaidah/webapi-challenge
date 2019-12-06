@@ -40,13 +40,19 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+Router, Middleware
+
 - [ ] Describe Middleware?
+      reusable function we use it every time we want to make sure the request is valid before we call the database
 
 - [ ] Describe a Resource?
+      it is the information and all data that is stored in the database
 
 - [ ] What can the API return to help clients know if a request was successful?
+      send status code with a message
 
 - [ ] How can we partition our application into sub-applications?
+      by router ,make each data endpoint in seperate file.
 
 ## Minimum Viable Product
 
