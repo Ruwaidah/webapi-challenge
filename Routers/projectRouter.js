@@ -54,7 +54,7 @@ router.post("/:id/actions", validAction, (req, res) => {
 
 // PUT Method to Update the project
 
-router.put("/:id", (req, res) => {
+router.put("/:id", validproject_id, (req, res) => {
   projectsDB
     .update(req.params.id, req.body)
     .then(updateproject => {

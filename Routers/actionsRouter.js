@@ -24,6 +24,20 @@ router.get("/:id", valideAction_id, (req, res) => {
   res.status(200).json(req.action);
 });
 
+//  Update action
+router.put("/:id", valideAction_id, (req, res) => {
+  actionsDB
+    .update(req.params.id, req.body)
+    .then(updateaction => {
+      res.status(200).json(updateaction);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "There was an error while saving the comment to the data base"
+      });
+    });
+});
+
 //  Custon Middleware validateACtion_ID
 function valideAction_id(req, res, next) {
   actionsDB
