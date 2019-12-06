@@ -38,6 +38,20 @@ router.put("/:id", valideAction_id, (req, res) => {
     });
 });
 
+// DELETE Action
+router.delete("/:id", valideAction_id, (req, res) => {
+  actionsDB
+    .remove(req.params.id)
+    .then(removed => {
+      res.status(200).json(removed);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "There was an error while saving the comment to the data base"
+      });
+    });
+});
+
 //  Custon Middleware validateACtion_ID
 function valideAction_id(req, res, next) {
   actionsDB

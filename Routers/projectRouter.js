@@ -67,6 +67,20 @@ router.put("/:id", validproject_id, (req, res) => {
     });
 });
 
+// DELETE Project
+router.delete("/:id", validproject_id, (req, res) => {
+  projectsDB
+    .remove(req.params.id)
+    .then(removed => {
+      res.status(200).json(removed);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "There was an error while saving the comment to the data base"
+      });
+    });
+});
+
 //  Custon Middleware validateproject_ID
 
 function validproject_id(req, res, next) {
