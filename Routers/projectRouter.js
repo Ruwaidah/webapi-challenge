@@ -21,17 +21,7 @@ router.get("/", (req, res) => {
 
 // GET ONE Project
 router.get("/:id", validproject_id, (req, res) => {
-  console.log(req.params.id);
-  projectsDB
-    .get(req.params.id)
-    .then(newproject => {
-      res.status(200).json(newproject);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: "There was an error while saving the comment to the data base"
-      });
-    });
+  res.status(200).json(req.project);
 });
 
 // POST method to Create new Project
@@ -62,6 +52,21 @@ router.post("/:id/actions", validAction, (req, res) => {
     });
 });
 
+// PUT Method to Update the project
+
+router.put("/:id", (req, res) => {
+  projectsDB
+    .update(req.params.id, req.body)
+    .then(updateproject => {
+      res.status(200).json(updateproject);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "There was an error while saving the comment to the data base"
+      });
+    });
+});
+
 //  Custon Middleware validateproject_ID
 
 function validproject_id(req, res, next) {
@@ -69,6 +74,7 @@ function validproject_id(req, res, next) {
     .get(req.params.id)
     .then(project => {
       if (project) {
+        req.project = project;
         next();
       } else {
         res.status(400).json({

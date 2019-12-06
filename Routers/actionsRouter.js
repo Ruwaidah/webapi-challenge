@@ -19,4 +19,29 @@ router.get("/", (req, res) => {
     });
 });
 
+// Get Action By ID
+router.get("/:id", valideAction_id, (req, res) => {
+  res.status(200).json(req.action);
+});
+
+//  Custon Middleware validateACtion_ID
+function valideAction_id(req, res, next) {
+  actionsDB
+    .get(req.params.id)
+    .then(action => {
+      if (action) {
+        req.action = action;
+        next();
+      } else {
+        res.status(400).json({
+          message: "invalid Action id"
+        });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "There was an error while saving the comment to the data base"
+      });
+    });
+}
 module.exports = router;
